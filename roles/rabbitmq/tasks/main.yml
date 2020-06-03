@@ -4,95 +4,82 @@
 
 # configure SqlServer
 
-- name: Create sqlserver User
-  user:
-    name: sqlserver
-    shell: /usr/sbin/nologin
-    home: /data/wwwroot/sqlserver
-    create_home: no
+- name: install sqlserver
+  shell: 
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+    sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/18.04/mssql-server-2017.list)"
+    sudo apt-get update
+    sudo apt-get install -y mssql-server
 
-- name: Create sqlserver directory
+- name: install sqlcmd and bcp
+  shell:
+    curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+    curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+    sudo apt-get update 
+    sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+
+- name: Set Environment
+  shell:
+    echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
+    source ~/.bash_profile
+    echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+    source ~/.bashrc
+
+- name: Create SqlServer directory for files
   file:
-    path: /data/wwwroot/sqlserver
+    path: /data/wwwroot/SqlServer
     state: directory
-    owner: sqlserver
-    group: sqlserver
-    
-- name: Download sqlserver
-  get_url:
-    dest: /data/wwwroot/sqlserver
-    url: "{{sqlserver_download_url}}"
-    owner: sqlserver
-    group: sqlserver
+    owner: mssql
+    group: mssql
 
-- name: Set sqlserver config
-  template:
-    src: sqlserver.conf.jinja2
-    dest: /data/wwwroot/sqlserver/sqlserver.conf
-    owner: sqlserver
-    group: sqlserver
-
-- name: Setting sqlserver service
-  copy:
-    src: sqlserver.service
-    dest: /lib/systemd/system/sqlserver.service
-
-- name: Restart sqlserver
-  service:
-    name: sqlserver.service
-    state: restarted
-    enabled: yes
-
-- name: Create sqlserver System User
-  user:
-      name: sqlserver 
-      create_home: no 
-      home: /opt/sqlserver
-      shell: /usr/sbin/nologin
-
-- name: Download sqlserver
-  unarchive:
-      src: "{{sqlserver_download_url}}"
-      dest: /opt/ 
-      group: sqlserver 
-      remote_src: yes
-      owner: sqlserver
-      mode: g+w
 
 - name: Create the storage directory for files.
   file:
-      path: /opt/sqlserver/data
+      path: /data/config/SqlServer
       state: directory 
-      owner: sqlserver 
-      group: sqlserver
-      mode: g+w
-      
-- name: Set database connection /opt/sqlserver/config/config.json
-  lineinfile:
-    dest: /opt/sqlserver/config/config.json
-    regexp: '"DataSource":'
-    line: '    "DataSource": "{{sqlserver_db_user}}:{{sqlserver_db_password}}@tcp(localhost:3306)/{{sqlserver_db_name}}?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s",'
-    backrefs: yes 
+      owner: mssql 
+      group: mssql
+      mode: g+w  
+
+- name: Create mssql User
+  user:
+    name: mssql
+    shell: /usr/sbin/nologin
+    home: /data/wwwroot/SqlServer
+    create_home: no
+
+
+- name: Set SqlServer pwd  
+  shell:
+    MSSQL_SA_PASSWORD='12345678' MSSQL_PID='express' /opt/mssql/bin/mssql-conf -n setup accept-eula
+
+
+- name: Restart SqlServer
+  service:
+    name: mssql-server.service
+    state: restarted
+    enabled: yes
+
 
 # set soft link, -b cover the exist links
 # ln -sb src des
 - name: set soft link
-  shell: |
-    ln -sb /opt/sqlserver  /data/wwwroot/sqlserver
-    ln -sb /opt/sqlserver/config /data/config/sqlserver
+  shell: 
+    ln -sb /lib/systemd/system/mssql-server.service /lib/systemd/system/sqlserver.service
+    ln -sb /opt/mssql/bin/sqlservr  /data/wwwroot/SqlServer
+    ln -sb /opt/mssql/bin/mssql-conf /data/config/SqlServer
 
 # Check version,
 # must use sudo sh -c to solve the no-root permission
 - block:
   - name: Check SqlServer Version
-    shell: sudo sh -c "sqlserverctl status | grep 'SqlServer version' 1>> /data/logs/install_version.txt"
+    shell: 
+     rpm -qa |grep mssql     
 
-  - name: Check Erlang Version
-    shell: sudo sh -c 'echo "Erlang $(yum info erlang | grep Version | sed -n 1p)" 1>> /data/logs/install_version.txt'
-    when: ansible_os_family=="RedHat"
 
 # check service state
 - name: Check SqlServer Service
-  shell: systemctl status sqlserver | grep Active*
+  shell: systemctl status sqlserver |grep Active*
   register: check_sqlserver_service
-  notify:    check_sqlserver_service
+  notify: check_sqlserver_service
+
