@@ -30,10 +30,10 @@
   shell: 
     curl "https://packages.microsoft.com/config/ubuntu/18.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list"
 
--name: update
- shell:
+- name: update
+  shell:
     sudo apt-get update 
-    
+
 - name: install sqlcmd
   apt:
     name: mssql-tools unixodbc-dev  
