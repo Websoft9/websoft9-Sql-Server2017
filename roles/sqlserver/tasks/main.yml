@@ -4,8 +4,8 @@
 
 # install SqlServer
 - name: import repository gpg key
-  apt_key:
-    url: https://packages.microsoft.com/keys/microsoft.asc
+  shell:
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 
 
 - name: Install software-properties-common
@@ -22,8 +22,8 @@
 
  # install sqlcmd  
 - name: import repository gpg key
-  apt_key:
-    url: https://packages.microsoft.com/keys/microsoft.asc
+  shell:
+    curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 
 
 - name:  register
