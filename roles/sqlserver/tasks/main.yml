@@ -61,10 +61,10 @@
     create_home: no
 
 
-- name: Set SqlServer pwd  
-  shell:
-    MSSQL_SA_PASSWORD='{{sqlserver_db_password}}' \
-    MSSQL_PID='express' /opt/mssql/bin/mssql-conf -n setup accept-eula
+#- name: Set SqlServer pwd  
+#  shell:
+#    MSSQL_SA_PASSWORD='{{sqlserver_db_password}}' \
+#    MSSQL_PID='express' /opt/mssql/bin/mssql-conf -n setup accept-eula
 
 
 - name: Restart SqlServer
