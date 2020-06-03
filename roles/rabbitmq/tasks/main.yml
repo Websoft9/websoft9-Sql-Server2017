@@ -95,4 +95,4 @@
 - name: Check RabbitMQ Service
   shell: systemctl status rabbitmq | grep Active*
   register: check_rabbitmq_service
-  notify: check_rabbitmq_service
+  notify:    check_rabbitmq_service
