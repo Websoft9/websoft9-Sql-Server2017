@@ -2,21 +2,39 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
-# configure SqlServer
+# install SqlServer
+- name: import repository gpg key
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+
+
+- name: Install software-properties-common
+  apt:
+    name: software-properties-common
+
+- name: register
+  shell: 
+    sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/18.04/mssql-server-{{version}}.list)"
 
 - name: install sqlserver
-  shell: 
-    curl -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-    apt-get install software-properties-common 
-    sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/18.04/mssql-server-{{version}}.list)"
-    sudo apt-get update
-    sudo apt-get install -y mssql-server
+  apt:
+    name: mssql-server   
 
-- name: install sqlcmd and bcp
-  shell:
-    curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+ # install sqlcmd  
+- name: import repository gpg key
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+
+
+- name:  register
+  shell: 
     curl "https://packages.microsoft.com/config/ubuntu/18.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list"
-    sudo apt-get update 
+
+- name: install sqlcmd
+  apt:
+    name: mssql-tools unixodbc-dev  
+
+-name: Set  sqlversion
     sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
 
 - name: Set Environment
