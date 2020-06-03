@@ -1,15 +1,15 @@
-# RabbitMQ Notes
+# SqlServer Notes
 
-组件名称：RabbitMQ-Server  
-安装文档：https://www.rabbitmq.com/download.html  
-配置文档：https://www.rabbitmq.com/admin-guide.html  
+组件名称：SqlServer-Server  
+安装文档：https://www.sqlserver.com/download.html  
+配置文档：https://www.sqlserver.com/admin-guide.html  
 支持平台： Debian家族 | RHEL家族 | Windows | Kubernetes |Docker  
 
 责任人：helin
 
 ## 概要
 
-RabbitMQ是一款开源的MQ系统，它包含RabbitMQ-Server和RabbitMQ-Client，服务器上运行的是RabbitMQ-Server
+SqlServer是一款开源的MQ系统，它包含SqlServer-Server和SqlServer-Client，服务器上运行的是SqlServer-Server
 
 ## 环境要求
 
@@ -21,37 +21,37 @@ RabbitMQ是一款开源的MQ系统，它包含RabbitMQ-Server和RabbitMQ-Client�
 
 ## 安装说明
 
-官方建议使用其自身提供的erlang和rabbitmq-server的仓库，不建议使用操作系统自带的仓库或其他第三方仓库。同时，官方提供了自动安装仓库的自动化脚本。
+官方建议使用其自身提供的erlang和sqlserver-server的仓库，不建议使用操作系统自带的仓库或其他第三方仓库。同时，官方提供了自动安装仓库的自动化脚本。
 
 下面基于不同的安装平台，分别进行安装说明。
 
 ### CentOS
 
 ```shell
-# 分别安装erlang源和rabbitmq-server源
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+# 分别安装erlang源和sqlserver-server源
+curl -s https://packagecloud.io/install/repositories/sqlserver/erlang/script.rpm.sh | sudo bash
+curl -s https://packagecloud.io/install/repositories/sqlserver/sqlserver-server/script.rpm.sh | sudo bash
 
 # 安装
-yum install erlang rabbitmq-server -y
+yum install erlang sqlserver-server -y
 ```
 
 ### Ubuntu
 
 ```shell
-# 分别安装erlang源和rabbitmq-server源
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.deb.sh | sudo bash
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.deb.sh | sudo bash
+# 分别安装erlang源和sqlserver-server源
+curl -s https://packagecloud.io/install/repositories/sqlserver/erlang/script.deb.sh | sudo bash
+curl -s https://packagecloud.io/install/repositories/sqlserver/sqlserver-server/script.deb.sh | sudo bash
 
 # 安装
 sudo apt-get update -y
-apt install erlang rabbitmq-server -y
+apt install erlang sqlserver-server -y
 ```
 
 ## 路径
 
-* 程序路径：/usr/lib/rabbitmq/lib/rabbitmq_server-*
-* 日志路径：/var/log/rabbitmq  
+* 程序路径：/usr/lib/sqlserver/lib/sqlserver_server-*
+* 日志路径：/var/log/sqlserver  
 * 配置文件路径：  
 * 其他...
 
@@ -60,17 +60,17 @@ apt install erlang rabbitmq-server -y
 安装完成后，需要依次完成如下配置
 
 ```shell
-# Set RabbitMQ
-- name: Restart RabbitMQ
-  shell: systemctl start rabbitmq-server
+# Set SqlServer
+- name: Restart SqlServer
+  shell: systemctl start sqlserver-server
 
-- name: Enable the management console of RabbitMQ
-  shell: rabbitmq-plugins enable rabbitmq_management
+- name: Enable the management console of SqlServer
+  shell: sqlserver-plugins enable sqlserver_management
 
-- name: Create administrator for RabbitMQ console
+- name: Create administrator for SqlServer console
   shell: |
-    rabbitmqctl add_user admin admin
-    rabbitmqctl set_user_tags admin administrator
+    sqlserverctl add_user admin admin
+    sqlserverctl set_user_tags admin administrator
 ```
 
 ## 账号密码
@@ -93,7 +93,7 @@ apt install erlang rabbitmq-server -y
 
 ## 服务
 
-本项目安装后自动生成：rabbitmq-server 服务
+本项目安装后自动生成：sqlserver-server 服务
 
 备注：如果开机没有服务，程序无法运行的情况下，需要自行编写服务后存放到项目中
 
@@ -124,8 +124,8 @@ WantedBy=multi-user.target
 通过如下的命令获取主要组件的版本号: 
 
 ```
-# Check RabbitMQ version
-sudo rabbitmqctl status | grep RabbitMQ*
+# Check SqlServer version
+sudo sqlserverctl status | grep SqlServer*
 
 # Check Erlang version
 ls /usr/lib64/erlang
@@ -147,7 +147,7 @@ ls /usr/lib64/erlang
 
 #### 有没有CLI工具？
 
-有，通过 `rabbitmqctl` 查看工具的说明
+有，通过 `sqlserverctl` 查看工具的说明
 
 ## 日志
 

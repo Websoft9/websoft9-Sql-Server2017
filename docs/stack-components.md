@@ -1,13 +1,13 @@
 # Parameters
 
-The RabbitMQ deployment package contains a sequence software (referred to as "components") required for RabbitMQ to run. The important information such as the component name, installation directory path, configuration file path, port, version, etc. are listed below.
+The SqlServer deployment package contains a sequence software (referred to as "components") required for SqlServer to run. The important information such as the component name, installation directory path, configuration file path, port, version, etc. are listed below.
 
 ## Path
 
-### RabbitMQ
+### SqlServer
 
-RabbitMQ installation directory:  */data/rabbitmq*  
-RabbitMQ logs directory:  */data/logs/rabbitmq*  
+SqlServer installation directory:  */data/sqlserver*  
+SqlServer logs directory:  */data/logs/sqlserver*  
 
 ### Nginx
 
@@ -31,7 +31,7 @@ You can run the cmd `netstat -tunlp` to list all used ports, and we list the fol
 
 | Name | Number | Use |  Necessity |
 | --- | --- | --- | --- |
-| HTTP | 8161 | HTTP requests for RabbitMQ Console| Required |
+| HTTP | 8161 | HTTP requests for SqlServer Console| Required |
 | HTTPS | 5672 | epmd | Optional |
 | TCP | 55672 | Erlang distribution | Optional |
 
@@ -60,6 +60,6 @@ docker -v
 yum info erlang
 apt show erlang
 
-# RabbitMQ version
-rabbitmqctl status | grep RabbitMQ*
+# SqlServer version
+sqlserverctl status | grep SqlServer*
 ```

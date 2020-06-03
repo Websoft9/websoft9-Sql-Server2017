@@ -1,19 +1,19 @@
 # FAQ
 
-#### How can I enable the debug mode of RabbitMQ service?
+#### How can I enable the debug mode of SqlServer service?
 
 ```
-systemctl stop rabbitmq-server
-rabbitmq-server console
+systemctl stop sqlserver-server
+sqlserver-server console
 ```
 
-#### Can I reset password of RabbitMQ by command?
+#### Can I reset password of SqlServer by command?
 
-Yes, e.g `rabbitmqctl change_password  admin newpassword`
+Yes, e.g `sqlserverctl change_password  admin newpassword`
 
-#### If there is no domain name, can I deploy RabbitMQ?
+#### If there is no domain name, can I deploy SqlServer?
 
-Yes, visit RabbitMQ by *http://Internet IP:8161*
+Yes, visit SqlServer by *http://Internet IP:8161*
 
 #### What is the password for the database root user?
 
@@ -23,7 +23,7 @@ The password is stored in the server related file: `/credentials/password.txt`
 
 Yes, phpMyAdmin is on it, visit by *http://Internet IP/phpmyadmin*
 
-#### Is it possible to modify the source path of RabbitMQ?
+#### Is it possible to modify the source path of SqlServer?
 
 No
 

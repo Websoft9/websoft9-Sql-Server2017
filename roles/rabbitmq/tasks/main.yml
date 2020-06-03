@@ -1,98 +1,98 @@
-# install RabbitMQ by OS_family
+# install SqlServer by OS_family
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
-# configure RabbitMQ
+# configure SqlServer
 
-- name: Create rabbitmq User
+- name: Create sqlserver User
   user:
-    name: rabbitmq
+    name: sqlserver
     shell: /usr/sbin/nologin
-    home: /data/wwwroot/rabbitmq
+    home: /data/wwwroot/sqlserver
     create_home: no
 
-- name: Create rabbitmq directory
+- name: Create sqlserver directory
   file:
-    path: /data/wwwroot/rabbitmq
+    path: /data/wwwroot/sqlserver
     state: directory
-    owner: rabbitmq
-    group: rabbitmq
+    owner: sqlserver
+    group: sqlserver
     
-- name: Download rabbitmq
+- name: Download sqlserver
   get_url:
-    dest: /data/wwwroot/rabbitmq
-    url: "{{rabbitmq_download_url}}"
-    owner: rabbitmq
-    group: rabbitmq
+    dest: /data/wwwroot/sqlserver
+    url: "{{sqlserver_download_url}}"
+    owner: sqlserver
+    group: sqlserver
 
-- name: Set rabbitmq config
+- name: Set sqlserver config
   template:
-    src: rabbitmq.conf.jinja2
-    dest: /data/wwwroot/rabbitmq/rabbitmq.conf
-    owner: rabbitmq
-    group: rabbitmq
+    src: sqlserver.conf.jinja2
+    dest: /data/wwwroot/sqlserver/sqlserver.conf
+    owner: sqlserver
+    group: sqlserver
 
-- name: Setting rabbitmq service
+- name: Setting sqlserver service
   copy:
-    src: rabbitmq.service
-    dest: /lib/systemd/system/rabbitmq.service
+    src: sqlserver.service
+    dest: /lib/systemd/system/sqlserver.service
 
-- name: Restart rabbitmq
+- name: Restart sqlserver
   service:
-    name: rabbitmq.service
+    name: sqlserver.service
     state: restarted
     enabled: yes
 
-- name: Create rabbitmq System User
+- name: Create sqlserver System User
   user:
-      name: rabbitmq 
+      name: sqlserver 
       create_home: no 
-      home: /opt/rabbitmq
+      home: /opt/sqlserver
       shell: /usr/sbin/nologin
 
-- name: Download rabbitmq
+- name: Download sqlserver
   unarchive:
-      src: "{{rabbitmq_download_url}}"
+      src: "{{sqlserver_download_url}}"
       dest: /opt/ 
-      group: rabbitmq 
+      group: sqlserver 
       remote_src: yes
-      owner: rabbitmq
+      owner: sqlserver
       mode: g+w
 
 - name: Create the storage directory for files.
   file:
-      path: /opt/rabbitmq/data
+      path: /opt/sqlserver/data
       state: directory 
-      owner: rabbitmq 
-      group: rabbitmq
+      owner: sqlserver 
+      group: sqlserver
       mode: g+w
       
-- name: Set database connection /opt/rabbitmq/config/config.json
+- name: Set database connection /opt/sqlserver/config/config.json
   lineinfile:
-    dest: /opt/rabbitmq/config/config.json
+    dest: /opt/sqlserver/config/config.json
     regexp: '"DataSource":'
-    line: '    "DataSource": "{{rabbitmq_db_user}}:{{rabbitmq_db_password}}@tcp(localhost:3306)/{{rabbitmq_db_name}}?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s",'
+    line: '    "DataSource": "{{sqlserver_db_user}}:{{sqlserver_db_password}}@tcp(localhost:3306)/{{sqlserver_db_name}}?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s",'
     backrefs: yes 
 
 # set soft link, -b cover the exist links
 # ln -sb src des
 - name: set soft link
   shell: |
-    ln -sb /opt/rabbitmq  /data/wwwroot/rabbitmq
-    ln -sb /opt/rabbitmq/config /data/config/rabbitmq
+    ln -sb /opt/sqlserver  /data/wwwroot/sqlserver
+    ln -sb /opt/sqlserver/config /data/config/sqlserver
 
 # Check version,
 # must use sudo sh -c to solve the no-root permission
 - block:
-  - name: Check RabbitMQ Version
-    shell: sudo sh -c "rabbitmqctl status | grep 'RabbitMQ version' 1>> /data/logs/install_version.txt"
+  - name: Check SqlServer Version
+    shell: sudo sh -c "sqlserverctl status | grep 'SqlServer version' 1>> /data/logs/install_version.txt"
 
   - name: Check Erlang Version
     shell: sudo sh -c 'echo "Erlang $(yum info erlang | grep Version | sed -n 1p)" 1>> /data/logs/install_version.txt'
     when: ansible_os_family=="RedHat"
 
 # check service state
-- name: Check RabbitMQ Service
-  shell: systemctl status rabbitmq | grep Active*
-  register: check_rabbitmq_service
-  notify:    check_rabbitmq_service
+- name: Check SqlServer Service
+  shell: systemctl status sqlserver | grep Active*
+  register: check_sqlserver_service
+  notify:    check_sqlserver_service

@@ -1,29 +1,29 @@
 # Start or Stop the Services
 
-These commands you must know when you using the RabbitMQ of Websoft9
+These commands you must know when you using the SqlServer of Websoft9
 
-## RabbitMQ
+## SqlServer
 
 ```shell
-sudo systemctl start rabbitmq-server
-sudo systemctl stop rabbitmq-server
-sudo systemctl restart rabbitmq-server
-sudo systemctl status rabbitmq-server
+sudo systemctl start sqlserver-server
+sudo systemctl stop sqlserver-server
+sudo systemctl restart sqlserver-server
+sudo systemctl status sqlserver-server
 
-# you can use this debug mode if RabbitMQ service can't run
-rabbitmq-server console
+# you can use this debug mode if SqlServer service can't run
+sqlserver-server console
 ```
 
-## RabbitMQ
+## SqlServer
 
 ```shell
-sudo systemctl start rabbitmq-server
-sudo systemctl stop rabbitmq-server
-sudo systemctl restart rabbitmq-server
-sudo systemctl status rabbitmq-server
+sudo systemctl start sqlserver-server
+sudo systemctl stop sqlserver-server
+sudo systemctl restart sqlserver-server
+sudo systemctl status sqlserver-server
 
-# you can use this debug mode if RabbitMQ service can't run
-rabbitmq-server console
+# you can use this debug mode if SqlServer service can't run
+sqlserver-server console
 ```
 
 ### MySQL

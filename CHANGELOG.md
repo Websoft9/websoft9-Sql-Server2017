@@ -9,8 +9,8 @@
 
 ### Bug Fixes
 
-* 2020-02-14  rabbitmq-version版本输出
-* 2020-02-13  rabbitmq-version版本输出
+* 2020-02-14  sqlserver-version版本输出
+* 2020-02-13  sqlserver-version版本输出
 
 ### Features
 
