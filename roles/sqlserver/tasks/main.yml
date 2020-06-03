@@ -34,7 +34,7 @@
   apt:
     name: mssql-tools unixodbc-dev  
 
--name: Set  sqlversion
+- name: Set sqlversion
     sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
 
 - name: Set Environment
