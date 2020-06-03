@@ -5,30 +5,12 @@ region: "0"
 
 sqlserver_db_name: sqlserver
 sqlserver_db_user: mssql
-sqlserver_db_password: "123456"
+sqlserver_db_password: "12345678"
 
 
 
 
 
-# 生成应用数据库和用户
-mysql_databases:
- - name: sqlserver
-   encoding: utf8
- 
-mysql_users:
- - name: mssql
-   host: localhost
-   priv: 'sqlserver.*:ALL'
+
 
   
-# 应用数据库信息
-init_application:
-  sqlserver:
-    service: mssql
-    database: sqlserver 
-    database_user: mssql
-    database_host: localhost
-    database_password: "123456"
-    config_path:
-      - /opt/sqlserver/config/config.json
