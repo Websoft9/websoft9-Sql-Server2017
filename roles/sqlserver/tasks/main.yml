@@ -34,11 +34,11 @@
   shell:
     sudo apt-get update 
 
-- name: install sqlcmd
+- name: install mssql-tools
   apt:
     name: mssql-tools
 
-- name: install sqlcmd
+- name: install unixodbc-dev
   apt:
     name: unixodbc-dev
 
