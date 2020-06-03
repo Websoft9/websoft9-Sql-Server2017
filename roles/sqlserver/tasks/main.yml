@@ -7,6 +7,7 @@
 - name: install sqlserver
   shell: 
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+    apt-get install software-properties-common 
     sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/18.04/mssql-server-2017.list)"
     sudo apt-get update
     sudo apt-get install -y mssql-server
@@ -24,22 +25,6 @@
     source ~/.bash_profile
     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
     source ~/.bashrc
-
-- name: Create SqlServer directory for files
-  file:
-    path: /data/wwwroot/SqlServer
-    state: directory
-    owner: mssql
-    group: mssql
-
-
-- name: Create the storage directory for files.
-  file:
-      path: /data/config/SqlServer
-      state: directory 
-      owner: mssql 
-      group: mssql
-      mode: g+w  
 
 - name: Create mssql User
   user:
@@ -60,6 +45,21 @@
     state: restarted
     enabled: yes
 
+- name: Create SqlServer directory for files
+  file:
+    path: /data/wwwroot/SqlServer
+    state: directory
+    owner: mssql
+    group: mssql
+
+
+- name: Create the storage directory for files.
+  file:
+      path: /data/config/SqlServer
+      state: directory 
+      owner: mssql 
+      group: mssql
+      mode: g+w  
 
 # set soft link, -b cover the exist links
 # ln -sb src des
