@@ -5,7 +5,7 @@ region: "0"
 
 sqlserver_db_name: sqlserver
 sqlserver_db_user: mssql
-
+sqlserver_db_password: SqlServer2017
 
 
 
