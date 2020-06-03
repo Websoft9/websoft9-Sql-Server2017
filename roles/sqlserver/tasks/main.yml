@@ -36,7 +36,11 @@
 
 - name: install sqlcmd
   apt:
-    name: mssql-tools unixodbc-dev  
+    name: mssql-tools
+
+- name: install sqlcmd
+  apt:
+    name: unixodbc-dev
 
 - name: Set sqlversion
   shell:
