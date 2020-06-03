@@ -45,7 +45,7 @@
   user:
     name: mssql
     shell: /usr/sbin/nologin
-    home: /data/wwwroot/SqlServer
+    home:  /opt/mssql/bin/sqlserver
     create_home: no
 
 
@@ -66,7 +66,7 @@
 - name: set soft link
   shell: 
     ln -sb /lib/systemd/system/mssql-server.service /lib/systemd/system/sqlserver.service
-    ln -sb /opt/mssql/bin/sqlservr  /data/wwwroot/SqlServer
+    ln -sb /opt/mssql/bin/sqlserver  /data/wwwroot/SqlServer
     ln -sb /opt/mssql/bin/mssql-conf /data/config/SqlServer
 
 # Check version,
