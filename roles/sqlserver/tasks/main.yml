@@ -53,8 +53,7 @@
     sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
 
 - name: Set Environment
-  shell: |
-    echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
+  shell: 
     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
     source ~/.bashrc
 
