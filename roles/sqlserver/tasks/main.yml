@@ -71,7 +71,9 @@
     enabled: yes
     notify: 
       - stop sqlserver
+    meta: flush_handlers
 
+    
 - name: Set SqlServer pwd  
   shell:
      MSSQL_SA_PASSWORD='Sqlserver2017' \
