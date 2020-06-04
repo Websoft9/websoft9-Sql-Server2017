@@ -65,16 +65,19 @@
     home:  /opt/mssql/bin/sqlserver
     create_home: no
 
+- name: Restart SqlServer
+  service:
+    name: mssql-server.service
+    enabled: yes
+    notify: 
+      - stop sqlserver
+
 - name: Set SqlServer pwd  
   shell:
      MSSQL_SA_PASSWORD='Sqlserver2017' \
      MSSQL_PID=Express \
      /opt/mssql/bin/mssql-conf -n setup accept-eula
 
-- name: Restart SqlServer
-  service:
-    name: mssql-server.service
-    enabled: yes
 
 - name: Create SqlServer directory for files
   file:
