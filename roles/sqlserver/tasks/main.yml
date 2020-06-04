@@ -54,11 +54,12 @@
 
 - name: Set Environment
   shell:
-    echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
-    source ~/.bash_profile
     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+- name: load file
+  shell:
     source ~/.bashrc
 
+   
 - name: Create mssql User
   user:
     name: mssql
