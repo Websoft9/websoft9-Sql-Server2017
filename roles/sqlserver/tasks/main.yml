@@ -68,7 +68,7 @@
 
 - name: Set SqlServer pwd  
   shell:
-     MSSQL_SA_PASSWORD='Sqlserver2017' \
+     MSSQL_SA_PASSWORD='{{sqlserver_db_password}}' \
      MSSQL_PID=Express \
      /opt/mssql/bin/mssql-conf -n setup accept-eula
 
