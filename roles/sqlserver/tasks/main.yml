@@ -107,7 +107,7 @@
 - block:
   - name: Check SqlServer Version
     shell: 
-           
+      dpkg -l |grep mssql 
 
 
 # check service state
