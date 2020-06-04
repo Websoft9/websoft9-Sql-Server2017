@@ -5,7 +5,8 @@ region: "0"
 
 sqlserver_db_name: sqlserver
 sqlserver_db_user: mssql
-sqlserver_db_password: SqlServer2017
+#密码须符合密码复杂性要求
+sqlserver_db_password: "SqlServer2017"
 
 
 
