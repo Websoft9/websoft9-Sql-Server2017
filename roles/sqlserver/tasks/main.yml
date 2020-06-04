@@ -98,10 +98,10 @@
 # set soft link, -b cover the exist links
 # ln -sb src des
 - name: set soft link
-  shell: 
-    ln -sbf /lib/systemd/system/mssql-server.service /lib/systemd/system/sqlserver.service
-    ln -sbf /opt/mssql/bin/  /data/wwwroot/SqlServer
-    ln -sbf /opt/mssql/lib/  /data/config/SqlServer
+  shell: |
+    ln -sb /lib/systemd/system/mssql-server.service /lib/systemd/system/sqlserver.service
+    ln -sb /opt/mssql/bin/  /data/wwwroot/SqlServer
+    ln -sb /opt/mssql/lib/  /data/config/SqlServer
 
 # Check version,
 # must use sudo sh -c to solve the no-root permission
