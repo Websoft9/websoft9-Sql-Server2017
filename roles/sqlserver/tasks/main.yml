@@ -64,14 +64,7 @@
     shell: /usr/sbin/nologin
     home:  /opt/mssql/bin/sqlserver
     create_home: no
-
-- name: Restart SqlServer
-  service:
-    name: mssql-server.service
-    enabled: yes
-    notify: stop sqlserver
-    meta: flush_handlers
-
+ 
 
 - name: Set SqlServer pwd  
   shell:
@@ -79,6 +72,12 @@
      MSSQL_PID=Express \
      /opt/mssql/bin/mssql-conf -n setup accept-eula
 
+
+- name: Restart SqlServer
+  service:
+    name: mssql-server.service
+    enabled: yes
+  
 
 - name: Create SqlServer directory for files
   file:
