@@ -35,7 +35,7 @@
   shell:
     sudo apt-get update 
 
-- name: install msodbcql17
+- name: install msodbcsql17
   shell:
     sudo ACCEPT_EULA=Y apt-get install msodbcsql17
 
@@ -54,9 +54,9 @@
 
 - name: Set Environment
   shell:
-    echo 'export PATH="$PATH:/opt/mssql-tools/bin' >> ~/.bash_profile
+    echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
     source ~/.bash_profile
-    echo 'export PATH="$PATH:/opt/mssql-tools/bin' >> ~/.bashrc
+    echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
     source ~/.bashrc
 
 - name: Create mssql User
@@ -69,7 +69,7 @@
 
 - name: Set SqlServer pwd  
   shell:
-    MSSQL_SA_PASSWORD='{{sqlserver_db_password}}' \
+    MSSQL_SA_PASSWORD="{{sqlserver_db_password}}" \
     MSSQL_PID='express' /opt/mssql/bin/mssql-conf -n setup accept-eula
 
 
