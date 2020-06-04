@@ -76,7 +76,7 @@
 - name: Restart SqlServer
   service:
     name: mssql-server.service
-    state: restart
+    state: restarted
     enabled: yes
 
 - name: Create SqlServer directory for files
