@@ -108,7 +108,7 @@
 - block:
   - name: Check SqlServer Version
     shell: 
-     rpm -qa |grep mssql     
+      sqlcmd      
 
 
 # check service state
