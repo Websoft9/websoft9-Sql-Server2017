@@ -55,6 +55,7 @@
 - name: Set Environment
   shell:
     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+  shell:
     source ~/.bashrc
 
    
@@ -107,7 +108,7 @@
 - block:
   - name: Check SqlServer Version
     shell: 
-      sqlcmd      
+           
 
 
 # check service state
