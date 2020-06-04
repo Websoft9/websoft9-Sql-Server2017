@@ -1,3 +1,9 @@
 - name: check_sqlserver_service
   debug:
     var: check_sqlserver_service.stdout
+
+- name: stop_sqlservice
+  service:
+    name: mssql-server.service
+    state: stop
+    
