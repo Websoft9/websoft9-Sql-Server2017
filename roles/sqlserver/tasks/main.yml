@@ -73,7 +73,7 @@
      /opt/mssql/bin/mssql-conf -n setup accept-eula
 
 
-- name: Restart SqlServer
+- name: Started SqlServer
   service:
     name: mssql-server.service
     enabled: yes
