@@ -65,7 +65,7 @@ sqlcmd -S localhost -U SA -P '<YourPassword>'
 
 * 程序路径：/opt/mssql/bin/sqlservr
 * 日志路径: /var/opt/mssql/data/下的 mastlog.ldf  modellog.ldf  msdblog.ldf  templog.ldf
-* 配置文件路径：/opt/mssql/bin/mssql-conf
+* 配置文件路径：/opt/mssql/lib/mssql-conf
 * 其他...
 
 ##配置
