@@ -54,7 +54,9 @@
 
 - name: Set Environment
   shell:
-    echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+    echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc 
+- name: 
+  shell: 
     source ~/.bashrc
 
    
@@ -107,7 +109,7 @@
 - block:
   - name: Check SqlServer Version
     shell: 
-      sudo sh -c dpkg -l |grep mssql 
+       dpkg -l |grep mssql 
 
 
 # check service state
