@@ -23,7 +23,8 @@
  # install sqlcmd  
 - name: import repository gpg key
   shell:
-    curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+    curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+
 
 
 - name:  register
@@ -34,10 +35,15 @@
   shell:
     sudo apt-get update 
 
-- name: install mssql-tools
-  apt:
-    name: mssql-tools
+- name: install msodbcql17
+  shell:
+    sudo ACCEPT_EULA=Y apt-get install msodbcsql17
 
+- name: install sql-tools
+  shell:
+    sudo ACCEPT_EULA=Y apt-get install mssql-tools
+
+    
 - name: install unixodbc-dev
   apt:
     name: unixodbc-dev
