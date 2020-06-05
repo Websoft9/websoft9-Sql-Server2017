@@ -1,12 +1,7 @@
 #全局 test
 region: "0"
 
-# sqlserver variable
 
-sqlserver_db_name: sqlserver
-sqlserver_db_user: mssql
-#密码须符合密码复杂性要求
-sqlserver_db_password: "SqlServer2017"
 
 
 
