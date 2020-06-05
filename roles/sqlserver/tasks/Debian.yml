@@ -29,6 +29,7 @@
     shell: 
       curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
+  # mssql-tools depend on msodbcsql17
   - name: update
     shell: |
       apt update
