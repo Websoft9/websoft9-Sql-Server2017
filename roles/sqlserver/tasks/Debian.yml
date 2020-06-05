@@ -1,49 +1,37 @@
-# install SqlServer
-- name: import repository gpg key
-  shell:
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-
-
+#1 prepare
 - name: Install software-properties-common
   apt:
     name: software-properties-common
+    update_cache: yes
+    
+- name: Import repository gpg key
+  shell:
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 
-- name: register
-  shell: 
-    sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/18.04/mssql-server-{{sqlserver_version}}.list)"
-
-- name: install sqlserver
-  apt:
-    name: mssql-server   
-
- # install sqlcmd  
 - name: import repository gpg key
   shell:
     curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 
+#2 install SQLSever
+- block:
+  - name: Add SQLServer apt repository
+    shell: 
+      sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/18.04/mssql-server-{{sqlserver_version}}.list)"
 
+  - name: Install SQLServer
+    apt:
+      name: mssql-server
+      update_cache: yes
 
-- name:  register
-  shell: 
-    curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+#3 install SQLSever tools: msodbcsql17,mssql-tools,unixodbc-dev
+- block:
+  - name:  register
+    shell: 
+      curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
-- name: update
-  shell:
-    sudo apt-get update 
-
-- name: install msodbcsql17
-  shell:
-    sudo ACCEPT_EULA=Y apt-get install msodbcsql17 -y
-
-- name: install sql-tools
-  shell:
-    sudo ACCEPT_EULA=Y apt-get install mssql-tools
-
-    
-- name: install unixodbc-dev
-  apt:
-    name: unixodbc-dev
-
-- name: Set sqlversion
-  shell:
-    sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+  - name: update
+    shell: |
+      apt update
+      sudo ACCEPT_EULA=Y apt-get install msodbcsql17 -y
+      sudo ACCEPT_EULA=Y apt-get install mssql-tools -y
+      sudo ACCEPT_EULA=Y apt-get install unixodbc-dev -y
