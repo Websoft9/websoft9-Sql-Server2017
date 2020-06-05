@@ -1,2 +1,7 @@
 # slect version(2017 or 2019)
 version: "2017"
+
+# sqlserver connection
+sqlserver_db_name: sqlserver
+sqlserver_db_user: mssql
+sqlserver_db_password: "SqlServer2017"
