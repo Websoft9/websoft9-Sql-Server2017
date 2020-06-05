@@ -1,57 +1,9 @@
-# install SqlServer by OS_family
+#1 install SqlServer by OS_family
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
-# install SqlServer
-- name: import repository gpg key
-  shell:
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 
-
-- name: Install software-properties-common
-  apt:
-    name: software-properties-common
-
-- name: register
-  shell: 
-    sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/18.04/mssql-server-{{sqlserver_version}}.list)"
-
-- name: install sqlserver
-  apt:
-    name: mssql-server   
-
- # install sqlcmd  
-- name: import repository gpg key
-  shell:
-    curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-
-
-
-- name:  register
-  shell: 
-    curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
-
-- name: update
-  shell:
-    sudo apt-get update 
-
-- name: install msodbcsql17
-  shell:
-    sudo ACCEPT_EULA=Y apt-get install msodbcsql17 -y
-
-- name: install sql-tools
-  shell:
-    sudo ACCEPT_EULA=Y apt-get install mssql-tools
-
-    
-- name: install unixodbc-dev
-  apt:
-    name: unixodbc-dev
-
-- name: Set sqlversion
-  shell:
-    sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
-
+#2 configure
 - name: Set Environment
   shell: 
     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
