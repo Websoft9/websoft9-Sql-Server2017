@@ -1,8 +1,10 @@
-# slect version(2017 or 2019)
+# sqlsever version: 2017 | 2019
 sqlserver_version: "2017"
+
+# sqlserver distribution: Express | ...
 sqlserver_distribution: "Express"
 
-# sqlserver connection
+# sqlserver 
 sqlserver_db_name: sqlserver
 sqlserver_db_user: mssql
 sqlserver_db_password: "SqlServer2017"
