@@ -4,7 +4,7 @@
 
 
 #2 configure
-- name: Set Environment
+- name: Set Environment for mssql-tools
   shell: 
     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 
