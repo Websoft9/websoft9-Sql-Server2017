@@ -19,8 +19,8 @@
 - name: Set SQLServer SA password and version
   shell: |
     systemctl stop mssql-server
-    MSSQL_SA_PASSWORD='sqlserver_sa_password' \
-    MSSQL_PID='sqlserver_distribution' \
+    sudo MSSQL_SA_PASSWORD='{{sqlserver_sa_password}}' \
+    MSSQL_PID='{{sqlserver_distribution}}' \
     /opt/mssql/bin/mssql-conf -n setup accept-eula
 
 - name: Started SQLServer
