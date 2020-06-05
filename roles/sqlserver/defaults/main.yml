@@ -1,5 +1,6 @@
 # slect version(2017 or 2019)
 sqlserver_version: "2017"
+sqlserver_distribution: "Express"
 
 # sqlserver connection
 sqlserver_db_name: sqlserver
