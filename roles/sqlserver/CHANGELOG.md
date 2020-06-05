@@ -17,3 +17,7 @@
 ## SQLServer Web GUI
 
 * http://www.sqlwebadmin.com/   
+
+## Update password
+
+* sqlcmd -U SA -P oldpassword -Z newpassword
