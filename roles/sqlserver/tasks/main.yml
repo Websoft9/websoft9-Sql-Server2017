@@ -8,20 +8,18 @@
   shell: 
     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 
-- name: Create mssql User
+- name: Create system user named mssql
   user:
     name: mssql
     shell: /usr/sbin/nologin
     home:  /opt/mssql/bin/sqlserver
     create_home: no
- 
 
-- name: Set SqlServer pwd  
+- name: Set SQLServer password and version
   shell:
      MSSQL_SA_PASSWORD='{{sqlserver_db_password}}' \
      MSSQL_PID=Express \
      /opt/mssql/bin/mssql-conf -n setup accept-eula
-
 
 - name: Started SqlServer
   service:
