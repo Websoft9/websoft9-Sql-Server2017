@@ -52,7 +52,7 @@
 # Check version
 - block:
   - name: Check SqlServer Version
-    shell: bash rpm -qa  || dpkg -l |grep mssql 
+    shell: bash  rpm -qa  || dpkg -l |grep mssql 
 
 # check service state
 - name: Check SqlServer Service

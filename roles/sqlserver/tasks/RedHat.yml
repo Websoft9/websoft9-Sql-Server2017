@@ -19,8 +19,9 @@
 - block:
   - name:  Remove mssql-tools Old Version
     yum: 
-      name: unixODBC-utf16 unixODBC-utf16-devel
-      state: absent 
+      name: unixODBC-utf16 , unixODBC-utf16-devel
+      state: absent
+
 
   # mssql-tools depend on msodbcsql17
   - name: Update and Install mssql-tools
