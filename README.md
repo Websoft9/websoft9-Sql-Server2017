@@ -3,9 +3,9 @@
 
 --- 以下为项目的Readme部分 ---
 
-# SqlServer 自动化安装与部署
+# SQLServer 自动化安装与部署
 
-本项目是由 [Websoft9](https://www.websoft9.com) 研发的 [SqlServer](https://sqlserver.io/) 自动化安装程序，开发语言是 Ansible。使用本项目，只需要用户在 Linux 上运行一条命令，即可自动化安装 SqlServer，让原本复杂的安装过程变得没有任何技术门槛。  
+本项目是由 [Websoft9](https://www.websoft9.com) 研发的 [SQLServer](https://sqlserver.io/) 自动化安装程序，开发语言是 Ansible。使用本项目，只需要用户在 Linux 上运行一条命令，即可自动化安装 SqlServer，让原本复杂的安装过程变得没有任何技术门槛。  
 
 本项目是开源项目，采用 LGPL3.0 开源协议。
 
@@ -24,13 +24,13 @@
 
 ## 组件
 
-包含的核心组件为：可选 SqlServer2.8.24/3.0.7/3.2.13/4.0.14/5.0.7/stable 多个版本
+包含的核心组件为：可选 SQLServer2.8.24/3.0.7/3.2.13/4.0.14/5.0.7/stable 多个版本
 
 更多请见 [参数表](/docs/zh/stack-components.md)
 
-## 本项目安装的是 SqlServer 最新版吗？
+## 本项目安装的是 SQLServer 最新版吗？
 
-本项目通过[SqlServer 官方仓库源](https://packagecloud.io/sqlserver/sqlserver-server/install)安装，每次安装均可保证为最新版本。
+本项目通过[SQLServer 官方仓库源](https://packagecloud.io/sqlserver/sqlserver-server/install)安装，每次安装均可保证为最新版本。
 
 版本号，请通过[官方下载](https://www.sqlserver.com/download.html)页面查看  
 
