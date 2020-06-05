@@ -15,53 +15,46 @@
     home:  /opt/mssql/bin/sqlserver
     create_home: no
 
-- name: Set SQLServer password and version
+- name: Set SQLServer SA password and version
   shell:
-     MSSQL_SA_PASSWORD='{{sqlserver_db_password}}' \
-     MSSQL_PID={{sqlserver_distribution}} \
-     /opt/mssql/bin/mssql-conf -n setup accept-eula
+    MSSQL_SA_PASSWORD='{{sqlserver_sa_password}}' \
+    MSSQL_PID={{sqlserver_distribution}} \
+    /opt/mssql/bin/mssql-conf -n setup accept-eula
 
-- name: Started SqlServer
+- name: Started SQLServer
   service:
     name: mssql-server.service
     enabled: yes
   
-
-- name: Create SqlServer directory for files
+- name: Create SQLServer directory for files
   file:
-    path: /data/wwwroot/SqlServer
+    path: /data/wwwroot/sqlserver
     state: directory
     owner: mssql
     group: mssql
 
-
 - name: Create the storage directory for files.
   file:
-      path: /data/config/SqlServer
-      state: directory 
-      owner: mssql 
-      group: mssql
-      mode: g+w  
+    path: /data/config/sqlserver
+    state: directory 
+    owner: mssql 
+    group: mssql
+    mode: g+w  
 
 # set soft link, -b cover the exist links
-# ln -sb src des
 - name: set soft link
   shell: |
     ln -sb /lib/systemd/system/mssql-server.service /lib/systemd/system/sqlserver.service
     ln -sb /opt/mssql/bin/  /data/wwwroot/SqlServer
     ln -sb /opt/mssql/lib/  /data/config/SqlServer
 
-# Check version,
-# must use sudo sh -c to solve the no-root permission
+# Check version
 - block:
   - name: Check SqlServer Version
-    shell: 
-      bash rpm -qa |grep mssql || dpkg -l |grep mssql 
-
+    shell: bash rpm -qa |grep mssql || dpkg -l |grep mssql 
 
 # check service state
 - name: Check SqlServer Service
   shell: systemctl status sqlserver |grep Active*
   register: check_sqlserver_service
   notify: check_sqlserver_service
-
