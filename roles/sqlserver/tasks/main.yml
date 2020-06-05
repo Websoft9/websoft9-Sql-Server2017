@@ -5,9 +5,10 @@
 
 #2 configure
 - name: Set Environment for mssql-tools
-  shell: 
+  shell: |
+    echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
     echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
-
+    source ~/.bashrc
 - name: Create system user named mssql
   user:
     name: mssql
@@ -51,8 +52,9 @@
 
 # Check version
 - block:
-  - name: Check SqlServer Version
-    shell: bash  rpm -qa  || dpkg -l |grep mssql 
+  - name: Check RabbitMQ Version
+    shell: echo `dpkg -l |grep mssql-server` > /data/logs/install_version.txt
+    
 
 # check service state
 - name: Check SqlServer Service
