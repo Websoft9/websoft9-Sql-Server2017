@@ -3,7 +3,7 @@
 ## To do
 
 1. 可视化管理工具
-2. AmazonLinux支持
+2. 安装更多工具，例如：mssql-cli，参考：https://docs.microsoft.com/en-us/sql/tools/overview-sql-tools?view=sql-server-ver15
 
 ## Logs
 
