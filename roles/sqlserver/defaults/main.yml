@@ -1,5 +1,5 @@
 # slect version(2017 or 2019)
-version: "2017"
+sqlserver_version: "2017"
 
 # sqlserver connection
 sqlserver_db_name: sqlserver
