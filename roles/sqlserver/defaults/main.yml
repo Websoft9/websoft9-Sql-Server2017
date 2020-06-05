@@ -6,4 +6,4 @@ sqlserver_distribution: "Express"
 
 # sqlserver SA password
 # e.g sqlcmd -S localhost -U SA -P '<YourPassword>'
-sqlserver_db_password: "SqlServer2017"
+sqlserver_sa_password: "SqlServer2017"
