@@ -46,13 +46,13 @@
 - name: set soft link
   shell: |
     ln -sb /lib/systemd/system/mssql-server.service /lib/systemd/system/sqlserver.service
-    ln -sb /opt/mssql/bin/  /data/wwwroot/SqlServer
-    ln -sb /opt/mssql/lib/  /data/config/SqlServer
+    ln -sb /opt/mssql/bin/  /data/wwwroot/sqlserver
+    ln -sb /opt/mssql/lib/  /data/config/sqlserver
 
 # Check version
 - block:
   - name: Check SqlServer Version
-    shell: bash rpm -qa |grep mssql || dpkg -l |grep mssql 
+    shell: bash rpm -qa  || dpkg -l |grep mssql 
 
 # check service state
 - name: Check SqlServer Service

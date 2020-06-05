@@ -1,7 +1,7 @@
 # sqlsever version: 2017 | 2019
 sqlserver_version: "2017"
 
-# sqlserver distribution: Express | ...
+# sqlserver distribution: Evaluation | Developer | Express | Web | Standard | Enterprise |Enterprise Core   
 sqlserver_distribution: "Express"
 
 # sqlserver SA password

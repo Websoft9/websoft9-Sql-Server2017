@@ -2,8 +2,5 @@
   debug:
     var: check_sqlserver_service.stdout
 
-- name: stop sqlserver
-  service:
-    name: mssql-server.service
-    state: stopped
+
     
