@@ -53,8 +53,7 @@
 # Check version
 - block:
   - name: Check SQLServer Version
-    shell: echo `dpkg -l |grep mssql-server` > /data/logs/install_version.txt
-    
+    shell: echo `dpkg -l |grep mssql-server || rpm -qa |grep mssql-server` >/data/logs/install_version.txt
 
 # check service state
 - name: Check SqlServer Service
