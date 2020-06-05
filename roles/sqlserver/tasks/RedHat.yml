@@ -1,0 +1,25 @@
+#1 prepare
+
+- name: Download  mssql-server.repo
+  shell:
+    sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/8/mssql-server-{{sqlserver_version}}.repo
+
+
+#2 install SQLSever
+- block:
+  - name: Install SQLServer
+    yum:
+      name: mssql-server
+      update_cache: yes
+
+#3 install SQLSever tools: msodbcsql17,mssql-tools,unixodbc-dev
+- block:
+  - name:  register
+    shell: 
+      curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+
+  # mssql-tools depend on msodbcsql17
+  - name: update
+    shell: |
+      apt update
+      sudo ACCEPT_EULA=Y apt-get install msodbcsql17 mssql-tools unixodbc-dev -y
