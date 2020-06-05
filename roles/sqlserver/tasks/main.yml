@@ -18,7 +18,7 @@
 - name: Set SQLServer password and version
   shell:
      MSSQL_SA_PASSWORD='{{sqlserver_db_password}}' \
-     MSSQL_PID=Express \
+     MSSQL_PID={{sqlserver_distribution}} \
      /opt/mssql/bin/mssql-conf -n setup accept-eula
 
 - name: Started SqlServer
