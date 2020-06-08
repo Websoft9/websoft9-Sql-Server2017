@@ -46,9 +46,9 @@
 # set soft link, -b cover the exist links
 - name: set soft link
   shell: |
-    ln -sb /lib/systemd/system/mssql-server.service /lib/systemd/system/sqlserver.service
-    ln -sb /opt/mssql/bin/  /data/wwwroot
-    ln -sb /opt/mssql/lib/  /data/config
+    ln -sf /lib/systemd/system/mssql-server.service /lib/systemd/system/sqlserver.service
+    ln -sf /opt/mssql/bin/  /data/wwwroot
+    ln -sf /opt/mssql/lib/  /data/config
 
 # Check version
 - block:
