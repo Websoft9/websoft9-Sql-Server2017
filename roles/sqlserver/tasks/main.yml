@@ -47,8 +47,8 @@
 - name: set soft link
   shell: |
     ln -sb /lib/systemd/system/mssql-server.service /lib/systemd/system/sqlserver.service
-    ln -sb /opt/mssql/bin/  /data/wwwroot/sqlserver
-    ln -sb /opt/mssql/lib/  /data/config/sqlserver
+    ln -sb /opt/mssql/bin/  /data/wwwroot
+    ln -sb /opt/mssql/lib/  /data/config
 
 # Check version
 - block:
