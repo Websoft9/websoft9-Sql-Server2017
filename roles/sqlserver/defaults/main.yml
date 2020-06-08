@@ -1,9 +1,9 @@
 # sqlsever version: 2017 | 2019
-sqlserver_version: "2017"
+sqlserver_version: "2019"
 
 # sqlserver distribution: Evaluation | Developer | Express | Web | Standard | Enterprise |Enterprise Core   
 sqlserver_distribution: "Express"
 
 # sqlserver SA password
 # e.g sqlcmd -S localhost -U SA -P '<YourPassword>'
-sqlserver_sa_password: "SqlServer2017"
+sqlserver_sa_password: "SqlServer2019"
