@@ -7,6 +7,9 @@
 
 ## Logs
 
+http://www.sqlwebadmin.com/     sqlweb GUi 
+
+
 ### Bug Fixes
 
 * 2020-02-14  sqlserver-version版本输出
