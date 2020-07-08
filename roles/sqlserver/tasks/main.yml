@@ -2,7 +2,6 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
-
 #2 configure
 - name: Set Environment for mssql-tools
   shell: |
@@ -13,8 +12,7 @@
   user:
     name: mssql
     shell: /usr/sbin/nologin
-   
-
+  
 - name: Set SQLServer SA password and version
   shell: |
     systemctl stop mssql-server
